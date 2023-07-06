@@ -1,0 +1,8 @@
+{
+  "name": "blog-api",
+  "version": "1.0.0",
+  "description": "Api para o micro-blog",
+  "main": "src/index.js",
+  "author": "Abdiel Nascimento",
+  "license": "MIT"
+}
