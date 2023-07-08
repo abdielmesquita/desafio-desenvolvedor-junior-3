@@ -7,12 +7,11 @@ const router = Router();
 
 // Rotas para teste
 router.get('/', (req, res) => {
-  res.send({ 'Hello to the microblog api world!' });
+  res.send('Hello to the microblog api world!');
 });
 router.get('/protected-route', userAuthentication, UserController.protected);
 
 router.post('/register', UserController.store);
 router.post('/login', UserController.login);
-
 
 module.exports = router;
