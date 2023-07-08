@@ -14,7 +14,8 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS articles (
   id UUID NOT NULL UNIQUE DEFAULT uuid_generate_v4(),
   title VARCHAR,
-  body VARCHAR NOT NULL,
+  body TEXT NOT NULL,
+  createdAt TIMESTAMP NOT NULL,
   user_id UUID NOT NULL,
   FOREIGN KEY(user_id) REFERENCES users(id)
 );
