@@ -43,7 +43,7 @@ class UserController {
 
     delete user.password;
 
-    const token = jwt.sign(user.email, process.env.JWT_DEV_ENVIRONMENT);
+    const token = jwt.sign(user.email, process.env.JWT_SECRET_TOKEN);
 
     response.send({ token, user });
   }
