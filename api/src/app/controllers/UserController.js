@@ -11,6 +11,14 @@ class UserController {
       return response.status(400).json({ error: 'O nome é obrigatório.' });
     }
 
+    if (!email) {
+      return response.status(400).json({ error: 'O e-mail é obrigatório.' });
+    }
+
+    if (!password) {
+      return response.status(400).json({ error: 'A senha é obrigatória.' });
+    }
+
     const usuarioExiste = await UsersRepository.findByEmail(email);
 
     if (usuarioExiste) {
