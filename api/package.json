@@ -6,7 +6,7 @@
   "author": "Abdiel Nascimento",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon src/index.js"
+    "dev": "npx nodemon src/index.js"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",

@@ -2,16 +2,16 @@ const express = require('express');
 require('dotenv').config();
 require('express-async-errors');
 
+const errorHandler = require('./app/middleware/errorHandler');
+const cors = require('./app/middleware/cors');
 const routes = require('./routes');
 
 const app = express();
 
 app.use(express.json());
+app.use(cors);
 app.use(routes);
-app.get((error, request, response, next) => {
-  // console.log(error);
-  response.sendStatus(500);
-});
+app.get(errorHandler);
 
 const port = 3001;
 
