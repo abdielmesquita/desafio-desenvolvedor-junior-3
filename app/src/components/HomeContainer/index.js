@@ -1,11 +1,11 @@
 import { Container } from './styles';
-import Header from '../Header';
+import HomeHero from '../HomeHero';
 import Login from '../Login';
 
 export default function HomeContainer() {
   return (
     <Container>
-      <Header />
+      <HomeHero />
       <Login />
     </Container>
   );
