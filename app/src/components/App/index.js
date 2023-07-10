@@ -5,7 +5,6 @@ import GlobalStyles from '../../assets/style/global';
 import defaulTheme from '../../assets/style/themes/default';
 
 import Routes from '../../Routes';
-import { Container } from './styles';
 
 function App() {
   return (
@@ -13,9 +12,7 @@ function App() {
       <ThemeProvider theme={defaulTheme}>
         <GlobalStyles />
 
-        <Container>
-          <Routes />
-        </Container>
+        <Routes />
       </ThemeProvider>
     </BrowserRouter>
   );

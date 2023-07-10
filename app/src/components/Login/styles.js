@@ -55,31 +55,34 @@ export const TabContent = styled.div`
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 16px;
   font-size: 16px;
 `;
 
 export const Label = styled.label`
-  // Estilos do input
+  color: ${({ theme }) => theme.backgroundColor};
+  margin-left: 16px;
+  font-size: 12px;
 `;
 
 export const Input = styled.input`
   background: transparent;
   color: ${({ theme }) => theme.backgroundColor};
   border: 1px solid ${({ theme }) => theme.backgroundColor};
-  /* border: 1px solid ${({ theme }) => theme.highlight}; */
   height: 36px;
+  margin: 0 16px 16px;
   padding: 8px;
   border-radius: 4px;
-  margin: 0 16px;
 
   &:focus {
-    /* Estilos para o input ativo */
     border-color: ${({ theme }) => theme.highlight};
   }
 
   &:focus-visible{
     outline: none;
+  }
+
+  &.error {
+    border: 2px solid red;
   }
 `;
 

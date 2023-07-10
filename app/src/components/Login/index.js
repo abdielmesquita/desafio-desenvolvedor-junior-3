@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import { Tabs } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import { login, register } from '../../services/api';
@@ -6,6 +7,7 @@ import {
   Container,
   TabContent,
   Form,
+  Label,
   Input,
   Button,
   CustomTabList,
@@ -17,26 +19,35 @@ import {
 
 export default function Login() {
   const [email, setEmail] = useState('');
+  const [userToken, setUserToken] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [name, setName] = useState('');
   const [registrationSuccess, setRegistrationSuccess] = useState(false);
   const [successMessage, setSuccessMessage] = useState(false);
   const [registrationError, setRegistrationError] = useState('');
   const [activeTabIdx, setActiveTabIdx] = useState(0);
+  const [redirect, setRedirect] = useState(false); // Adicione o estado para redirecionamento
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       await login(email, password);
-      // Lógica adicional após o login ser realizado com sucesso
+      await setUserToken(localStorage.getItem('token'));
+      await setRedirect(true);
     } catch (error) {
       setRegistrationError(error.message || 'Login failed');
     }
+
+    return null;
   };
 
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
+      if (password !== confirmPassword) {
+        setRegistrationError('As senhas digitadas não sao iguais');
+      }
       await register(name, email, password);
       setRegistrationSuccess(true);
       setActiveTabIdx(0);
@@ -56,6 +67,10 @@ export default function Login() {
     }
   };
 
+  if (redirect && userToken) {
+    return <Redirect to="/blog" />;
+  }
+
   return (
     <Container>
       <Tabs selectedIndex={activeTabIdx} onSelect={handleTabSelect}>
@@ -73,17 +88,19 @@ export default function Login() {
           )}
           <TabContent>
             <Form onSubmit={handleLogin} autoComplete="off">
+              <Label>E-mail: </Label>
               <Input
                 type="email"
-                placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                autoComplete="off"
               />
+              <Label>Senha: </Label>
               <Input
                 type="password"
-                placeholder="Senha"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                autoComplete="off"
               />
               <Button type="submit">Login</Button>
             </Form>
@@ -103,25 +120,32 @@ export default function Login() {
           )}
           <TabContent>
             <Form onSubmit={handleRegister}>
+              <Label>Nome: </Label>
               <Input
                 type="text"
-                placeholder="Nome"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 autoComplete="off"
               />
+              <Label>E-mail: </Label>
               <Input
                 type="email"
-                placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 autoComplete="off"
               />
+              <Label>Senha: </Label>
               <Input
                 type="password"
-                placeholder="Senha"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                autoComplete="off"
+              />
+              <Label>Confirmar senha: </Label>
+              <Input
+                type="password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
                 autoComplete="off"
               />
               <Button type="submit">Inscrever-se agora</Button>

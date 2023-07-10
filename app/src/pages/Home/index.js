@@ -1,11 +1,7 @@
-import Header from '../../components/Header';
-import Login from '../../components/Login';
+import HomeContainer from '../../components/HomeContainer';
 
 export default function Home() {
   return (
-    <>
-      <Header />
-      <Login />
-    </>
+    <HomeContainer />
   );
 }
